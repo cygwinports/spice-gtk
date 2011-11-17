@@ -1,0 +1,9 @@
+category: Gnome Net
+requires: libcelt051_0 libgcc1 libglib2.0_0 libgstinterfaces0.10_0 libgstreamer0.10_0 libintl8 libjpeg8 libopenssl098 libpixman1_0 libsasl2 zlib0
+external-source: spice-gtk
+sdesc: "SPICE GLib client library (runtime)"
+ldesc: "The Spice project aims to provide a complete open source 
+solution for interaction with virtualized desktop devices.The Spice 
+project deals with both the virtualized devices and the front-end. 
+Interaction between front-end and back-end is done using VD-Interfaces,
+which can be easily utilitzed by a third-party component."

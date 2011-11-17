@@ -1,0 +1,48 @@
+inherit gnome2
+
+DESCRIPTION="SPICE GTK+ client"
+HOMEPAGE="http://spice-space.org/"
+SRC_URI="http://spice-space.org/download/gtk/${P}.tar.bz2"
+PATCH_URI="0.7-cygwin.patch"
+
+DEPEND="gnome-common
+	girepository(Gtk-3.0)
+	pkgconfig(celt051)
+	pkgconfig(gstreamer-app-0.10)
+	pkgconfig(gstreamer-interfaces-0.10)
+	pkgconfig(gtk+-3.0)
+	pkgconfig(openssl)
+	pkgconfig(pixman-1)
+	pkgconfig(spice-protocol)
+	pkgconfig(zlib)
+	vala(gtk+-3.0)
+	libjpeg-devel libsasl2-devel"
+
+PKG_NAMES="${PN} libspice-client-glib2.0_1 libspice-client-glib2.0-devel
+           libspice-client-gtk3.0_1 libspice-client-gtk3.0-devel
+           libspice-controller0 libspice-controller-devel vala-spice
+           girepository-SpiceClientGLib2.0 girepository-SpiceClientGtk3.0"
+spice_gtk_CONTENTS="usr/bin/*.exe usr/share/doc/ usr/share/locale/"
+libspice_client_glib2_0_1_CONTENTS="usr/bin/cygspice-client-glib-2.0-1.dll"
+libspice_client_glib2_0_devel_CONTENTS="usr/include/spice-client-glib-2.0/
+	usr/lib/libspice-client-glib-2.0.* usr/lib/pkgconfig/spice-client-glib-2.0.pc"
+libspice_client_gtk3_0_1_CONTENTS="usr/bin/cygspice-client-gtk-3.0-1.dll"
+libspice_client_gtk3_0_devel_CONTENTS="usr/include/spice-client-gtk-3.0/
+	usr/lib/libspice-client-gtk-3.0.* usr/lib/pkgconfig/spice-client-gtk-3.0.pc"
+libspice_controller0_CONTENTS="usr/bin/cygspice-controller-0.dll"
+libspice_controller_devel_CONTENTS="usr/include/spice-controller/
+	usr/lib/libspice-controller.* usr/lib/pkgconfig/spice-controller.pc"
+girepository_SpiceClientGLib2_0_CONTENTS="usr/*/gir*/SpiceClientGLib-2.0.*"
+girepository_SpiceClientGtk3_0_CONTENTS="usr/*/gir*/SpiceClientGtk-3.0.*"
+vala_spice_CONTENTS="usr/share/vala/vapi/spice-*"
+
+CYGCONF_ARGS="
+	--disable-gtk-doc
+	--disable-smartcard
+	--disable-usbredir
+	--enable-vala
+	--with-audio=gstreamer
+	--with-coroutine=gthread
+	--with-gtk=3.0
+	--with-sasl
+"
