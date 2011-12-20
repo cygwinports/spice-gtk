@@ -1,5 +1,5 @@
 category: Gnome Net
-requires: libcelt051_0 libgcc1 libglib2.0_0 libgstinterfaces0.10_0 libgstreamer0.10_0 libintl8 libjpeg8 libopenssl098 libpixman1_0 libsasl2 zlib0
+requires: libcelt051_0 libgcc1 libglib2.0_0 libintl8 libjpeg8 libopenssl098 libpixman1_0 libpulse0 libpulse-mainloop-glib0 libsasl2 zlib0
 external-source: spice-gtk
 sdesc: "SPICE GLib client library (runtime)"
 ldesc: "The Spice project aims to provide a complete open source 
