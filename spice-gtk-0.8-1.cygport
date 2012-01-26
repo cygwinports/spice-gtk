@@ -5,7 +5,8 @@ HOMEPAGE="http://spice-space.org/"
 SRC_URI="http://spice-space.org/download/gtk/${P}.tar.bz2"
 
 PATCH_URI="0.7-cygwin.patch
-           0.7-python-build.patch"
+           0.7-python-build.patch
+           0.8-vala-build.patch"
 
 DEPEND="gnome-common
 	girepository(Gtk-2.0)
