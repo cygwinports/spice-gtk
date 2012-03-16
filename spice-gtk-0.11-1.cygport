@@ -5,8 +5,7 @@ HOMEPAGE="http://spice-space.org/"
 SRC_URI="http://spice-space.org/download/gtk/${P}.tar.bz2"
 
 PATCH_URI="0.7-cygwin.patch
-           0.7-python-build.patch
-           0.8-vala-build.patch"
+           0.7-python-build.patch"
 
 DEPEND="gnome-common
 	girepository(Gtk-2.0)
@@ -60,6 +59,7 @@ CYGCONF_ARGS="
 
 src_compile() {
 	cd ${S}
+	mkdir -p spice-protocol/m4
 	gnome2_autoreconf
 
 	mkdir -p ${B}/gtk2
@@ -77,3 +77,5 @@ src_install() {
 	cd ${B}/gtk3
 	cyginstall
 }
+
+KEEP_LA_FILES="none"

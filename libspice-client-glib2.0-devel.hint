@@ -1,5 +1,5 @@
 category: Gnome Net
-requires: libspice-client-glib2.0_1 libcelt051-devel libglib2.0-devel libjpeg-devel openssl-devel libpixman1-devel libpulse-devel libsasl2-devel spice-protocol zlib-devel
+requires: libspice-client-glib2.0_1 libcelt051-devel libglib2.0-devel openssl-devel libpixman1-devel spice-protocol
 external-source: spice-gtk
 sdesc: "SPICE GLib client library (development)"
 ldesc: "The Spice project aims to provide a complete open source 

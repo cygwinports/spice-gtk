@@ -1,5 +1,5 @@
 category: Gnome Net
-requires: libspice-client-gtk2.0_1 libcairo-devel libglib2.0-devel libgtk2-devel libspice-client-glib2.0-devel libX11-devel
+requires: libspice-client-gtk2.0_1 libglib2.0-devel libgtk2-devel libspice-client-glib2.0-devel
 external-source: spice-gtk
 sdesc: "SPICE GTK+ 2.x client library (development)"
 ldesc: "The Spice project aims to provide a complete open source 
