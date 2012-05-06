@@ -59,7 +59,7 @@ CYGCONF_ARGS="
 
 src_compile() {
 	cd ${S}
-	mkdir -p spice-protocol/m4
+	mkdir -p spice-common/spice-protocol/m4
 	gnome2_autoreconf
 
 	mkdir -p ${B}/gtk2
