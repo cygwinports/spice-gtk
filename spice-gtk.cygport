@@ -1,9 +1,9 @@
 inherit gnome2 python
 
 NAME="spice-gtk"
-VERSION=0.14
+VERSION=0.16
 RELEASE=1
-CATEGORY="Gnome"
+CATEGORY="GNOME"
 SUMMARY="SPICE GTK+ client"
 DESCRIPTION="The Spice project aims to provide a complete open source solution
 for interaction with virtualized desktop devices. The Spice project deals with
@@ -99,5 +99,3 @@ src_install() {
 	cd ${B}/gtk3
 	cyginstall
 }
-
-KEEP_LA_FILES="none"
