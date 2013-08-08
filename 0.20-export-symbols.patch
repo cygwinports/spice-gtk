@@ -1,0 +1,20 @@
+--- origsrc/spice-gtk-0.20/gtk/map-file	2013-06-26 08:55:08.000000000 -0500
++++ src/spice-gtk-0.20/gtk/map-file	2013-08-08 17:31:25.031746900 -0500
+@@ -11,6 +11,7 @@ spice_channel_get_type;
+ spice_channel_new;
+ spice_channel_open_fd;
+ spice_channel_set_capability;
++spice_channel_string_to_type;
+ spice_channel_test_capability;
+ spice_channel_test_common_capability;
+ spice_channel_type_to_string;
+--- origsrc/spice-gtk-0.20/gtk/spice-glib-sym-file	2013-06-26 08:55:08.000000000 -0500
++++ src/spice-gtk-0.20/gtk/spice-glib-sym-file	2013-08-08 17:30:58.246214800 -0500
+@@ -11,6 +11,7 @@ spice_channel_get_type
+ spice_channel_new
+ spice_channel_open_fd
+ spice_channel_set_capability
++spice_channel_string_to_type
+ spice_channel_test_capability
+ spice_channel_test_common_capability
+ spice_channel_type_to_string

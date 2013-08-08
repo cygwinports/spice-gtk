@@ -1,9 +1,9 @@
 inherit gnome2 python
 
 NAME="spice-gtk"
-VERSION=0.16
+VERSION=0.20
 RELEASE=1
-CATEGORY="GNOME"
+CATEGORY="Libs"
 SUMMARY="SPICE GTK+ client"
 DESCRIPTION="The Spice project aims to provide a complete open source solution
 for interaction with virtualized desktop devices. The Spice project deals with
@@ -11,10 +11,13 @@ both the virtualized devices and the front-end. Interaction between front-end
 and back-end is done using VD-Interfaces, which can be easily utilitzed by a
 third-party component."
 HOMEPAGE="http://spice-space.org/"
-SRC_URI="http://spice-space.org/download/gtk/${P}.tar.bz2"
+SRC_URI="http://spice-space.org/download/gtk/${NAME}-${VERSION}.tar.bz2"
 
-PATCH_URI="0.7-cygwin.patch
-           0.7-python-build.patch"
+PATCH_URI="
+	0.7-cygwin.patch
+	0.7-python-build.patch
+	0.20-export-symbols.patch
+"
 
 DEPEND="gnome-common
 	girepository(Gtk-2.0)
@@ -32,12 +35,13 @@ DEPEND="gnome-common
 	vala(gtk+-3.0)
 	libjpeg-devel libsasl2-devel"
 
-PKG_NAMES="${PN} libspice-client-glib2.0_8 libspice-client-glib2.0-devel
+PKG_NAMES="${NAME} libspice-client-glib2.0_8 libspice-client-glib2.0-devel
            libspice-client-gtk2.0_4 libspice-client-gtk2.0-devel
            libspice-client-gtk3.0_4 libspice-client-gtk3.0-devel
            libspice-controller0 libspice-controller-devel vala-spice
            python-spiceclientgtk girepository-SpiceClientGLib2.0
            girepository-SpiceClientGtk2.0 girepository-SpiceClientGtk3.0"
+spice_gtk_CATEGORY="Net"
 spice_gtk_CONTENTS="usr/bin/*.exe usr/share/doc/ usr/share/locale/"
 libspice_client_glib2_0_8_SUMMARY="GObject SPICE client library (runtime)"
 libspice_client_glib2_0_8_CONTENTS="usr/bin/cygspice-client-glib-2.0-8.dll"
@@ -77,6 +81,7 @@ CYGCONF_ARGS="
 	--enable-vala
 	--with-coroutine=gthread
 	--with-sasl
+	rra_cv_ld_version_script=no
 "
 
 src_compile() {
