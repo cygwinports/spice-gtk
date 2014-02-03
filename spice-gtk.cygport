@@ -1,7 +1,7 @@
 inherit gnome2 python
 
 NAME="spice-gtk"
-VERSION=0.20
+VERSION=0.22
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="SPICE GTK+ client"
@@ -16,7 +16,6 @@ SRC_URI="http://spice-space.org/download/gtk/${NAME}-${VERSION}.tar.bz2"
 PATCH_URI="
 	0.7-cygwin.patch
 	0.7-python-build.patch
-	0.20-export-symbols.patch
 "
 
 DEPEND="gnome-common
@@ -74,6 +73,8 @@ python_spiceclientgtk_CONTENTS="${PYTHON_SITELIB#/}/SpiceClientGtk.*"
 vala_spice_SUMMARY="GTK+ SPICE client libraries (Vala bindings)"
 vala_spice_CONTENTS="usr/share/vala/vapi/spice-*"
 
+DIFF_EXCLUDES="*.nsis"
+
 CYGCONF_ARGS="
 	--disable-gtk-doc
 	--disable-smartcard
@@ -91,16 +92,20 @@ src_compile() {
 
 	mkdir -p ${B}/gtk2
 	cd ${B}/gtk2
-	gnome2_compile --with-gtk=2.0 --with-python
+	gnome2_configure --with-gtk=2.0 --with-python
+	# tests programs use internal symbols, only link successfully with
+	# --enable-static
+	cygmake noinst_PROGRAMS=
 
 	mkdir -p ${B}/gtk3
 	cd ${B}/gtk3
-	gnome2_compile --with-gtk=3.0
+	gnome2_configure --with-gtk=3.0
+	cygmake noinst_PROGRAMS=
 }
 
 src_install() {
 	cd ${B}/gtk2
-	cyginstall
+	cyginstall noinst_PROGRAMS=
 	cd ${B}/gtk3
-	cyginstall
+	cyginstall noinst_PROGRAMS=
 }
