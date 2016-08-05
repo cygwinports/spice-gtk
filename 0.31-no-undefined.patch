@@ -1,6 +1,17 @@
---- origsrc/spice-gtk-0.7.81-4f76/gtk/Makefile.am	2011-11-15 13:41:46.000000000 -0600
-+++ src/spice-gtk-0.7.81-4f76/gtk/Makefile.am	2011-12-19 21:43:53.550497000 -0600
-@@ -507,7 +507,7 @@ pyexec_LTLIBRARIES = SpiceClientGtk.la
+--- origsrc/spice-gtk-0.31/src/Makefile.am	2016-02-18 09:29:04.000000000 -0600
++++ src/spice-gtk-0.31/src/Makefile.am	2016-08-04 18:16:21.442369000 -0500
+@@ -126,6 +126,10 @@ SPICE_GTK_LIBADD_COMMON =		\
+ 	$(LIBM)				\
+ 	$(NULL)
+ 
++if !OS_WIN32
++SPICE_GTK_LIBADD_COMMON += -lX11
++endif
++
+ SPICE_GTK_SOURCES_COMMON =		\
+ 	glib-compat.h			\
+ 	gtk-compat.h			\
+@@ -585,7 +589,7 @@ $(install_pyexecLTLIBRARIES): install-li
  
  SpiceClientGtk_la_LIBADD = libspice-client-gtk-2.0.la libspice-client-glib-2.0.la $(PYGTK_LIBS)
  SpiceClientGtk_la_CFLAGS = $(GTK_CFLAGS) $(PYTHON_INCLUDES) $(PYGTK_CFLAGS) $(WARN_PYFLAGS)

@@ -1,7 +1,7 @@
 inherit gnome2 python
 
 NAME="spice-gtk"
-VERSION=0.27
+VERSION=0.31
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="SPICE GTK+ client"
@@ -12,17 +12,9 @@ and back-end is done using VD-Interfaces, which can be easily utilized by a
 third-party component."
 HOMEPAGE="http://spice-space.org/"
 SRC_URI="http://spice-space.org/download/gtk/${NAME}-${VERSION}.tar.bz2"
-
 PATCH_URI="
-	fedora/0001-session-keep-main-channel-on-reconnect.patch
-	fedora/0002-channel-factorize-failed-authentication.patch
-	fedora/0003-channel-do-not-enter-channel-iterate-on-early-error.patch
-	fedora/0004-channel-introduce-SPICE_CHANNEL_STATE_RECONNECTING.patch
-	fedora/0005-channel-throw-auth-error-when-coroutine-ends.patch
-	fedora/0006-channel-clear-channel-error-after-auth-error.patch
-	fedora/0007-usbredir-prevent-crash-when-calling-without-host.patch
 	0.7-cygwin.patch
-	0.7-python-build.patch
+	0.31-no-undefined.patch
 "
 
 DEPEND="gnome-common
@@ -32,7 +24,7 @@ DEPEND="gnome-common
 	pkgconfig(gtk+-2.0)
 	pkgconfig(gtk+-3.0)
 	pkgconfig(liblz4)
-	pkgconfig(libphodav-1.0)
+	pkgconfig(libphodav-2.0)
 	pkgconfig(libpulse-mainloop-glib)
 	pkgconfig(libusb-1.0)
 	pkgconfig(libusbredirhost)
@@ -52,7 +44,7 @@ PKG_NAMES="${NAME} libspice-client-glib2.0_8 libspice-client-glib2.0-devel
            python-spiceclientgtk girepository-SpiceClientGLib2.0
            girepository-SpiceClientGtk2.0 girepository-SpiceClientGtk3.0"
 spice_gtk_CATEGORY="Net"
-spice_gtk_CONTENTS="usr/bin/*.exe usr/share/doc/ usr/share/locale/"
+spice_gtk_CONTENTS="usr/bin/*.exe usr/share/doc/ usr/share/locale/ usr/share/man/"
 libspice_client_glib2_0_8_SUMMARY="GObject SPICE client library (runtime)"
 libspice_client_glib2_0_8_CONTENTS="usr/bin/cygspice-client-glib-2.0-8.dll"
 libspice_client_glib2_0_devel_SUMMARY="GObject SPICE server library (development)"
@@ -84,17 +76,18 @@ python_spiceclientgtk_CONTENTS="${PYTHON_SITELIB#/}/SpiceClientGtk.*"
 vala_spice_SUMMARY="GTK+ SPICE client libraries (Vala bindings)"
 vala_spice_CONTENTS="usr/share/vala/vapi/spice-*"
 
-DIFF_EXCLUDES="*.nsis"
+DIFF_EXCLUDES="*.nsis spice-version.h"
 
 CYGCONF_ARGS="
 	--disable-gtk-doc
 	--disable-smartcard
 	--disable-polkit
+	--enable-lz4
 	--enable-vala
-	--with-coroutine=gthread
 	--with-sasl
 	rra_cv_ld_version_script=no
 "
+#	--with-coroutine=gthread
 
 src_compile() {
 	cd ${S}
@@ -104,14 +97,12 @@ src_compile() {
 	mkdir -p ${B}/gtk2
 	cd ${B}/gtk2
 	gnome2_configure --with-gtk=2.0 --with-python
-	# tests programs use internal symbols, only link successfully with
-	# --enable-static
-	cygmake noinst_PROGRAMS=
+	cygmake
 
 	mkdir -p ${B}/gtk3
 	cd ${B}/gtk3
 	gnome2_configure --with-gtk=3.0
-	cygmake noinst_PROGRAMS=
+	cygmake
 }
 
 src_install() {

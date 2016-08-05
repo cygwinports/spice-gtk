@@ -9,3 +9,15 @@
          os_win32=yes
          gio_os=gio-windows-2.0
          red_target=Windows
+--- origsrc/spice-gtk-0.31/src/spice-widget-egl.c	2016-02-18 09:29:04.000000000 -0600
++++ src/spice-gtk-0.31/src/spice-widget-egl.c	2016-08-04 17:58:43.224003400 -0500
+@@ -26,7 +26,9 @@
+ #include "spice-widget.h"
+ #include "spice-widget-priv.h"
+ #include "spice-gtk-session-priv.h"
++#ifdef __linux__
+ #include <libdrm/drm_fourcc.h>
++#endif
+ 
+ #include <gdk/gdkx.h>
+ 
