@@ -1,7 +1,7 @@
-inherit gnome2 python
+inherit gnome2
 
 NAME="spice-gtk"
-VERSION=0.31
+VERSION=0.33
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="SPICE GTK+ client"
@@ -18,10 +18,8 @@ PATCH_URI="
 "
 
 DEPEND="gnome-common
-	girepository(Gtk-2.0)
 	girepository(Gtk-3.0)
 	pkgconfig(celt051)
-	pkgconfig(gtk+-2.0)
 	pkgconfig(gtk+-3.0)
 	pkgconfig(liblz4)
 	pkgconfig(libphodav-2.0)
@@ -33,16 +31,13 @@ DEPEND="gnome-common
 	pkgconfig(pygtk-2.0)
 	pkgconfig(spice-protocol)
 	pkgconfig(zlib)
-	vala(gtk+-2.0)
 	vala(gtk+-3.0)
 	libjpeg-devel libsasl2-devel"
 
 PKG_NAMES="${NAME} libspice-client-glib2.0_8 libspice-client-glib2.0-devel
-           libspice-client-gtk2.0_4 libspice-client-gtk2.0-devel
-           libspice-client-gtk3.0_4 libspice-client-gtk3.0-devel
+           libspice-client-gtk3.0_5 libspice-client-gtk3.0-devel
            libspice-controller0 libspice-controller-devel vala-spice
-           python-spiceclientgtk girepository-SpiceClientGLib2.0
-           girepository-SpiceClientGtk2.0 girepository-SpiceClientGtk3.0"
+           girepository-SpiceClientGLib2.0 girepository-SpiceClientGtk3.0"
 spice_gtk_CATEGORY="Net"
 spice_gtk_CONTENTS="usr/bin/*.exe usr/share/doc/ usr/share/locale/ usr/share/man/"
 libspice_client_glib2_0_8_SUMMARY="GObject SPICE client library (runtime)"
@@ -50,13 +45,8 @@ libspice_client_glib2_0_8_CONTENTS="usr/bin/cygspice-client-glib-2.0-8.dll"
 libspice_client_glib2_0_devel_SUMMARY="GObject SPICE server library (development)"
 libspice_client_glib2_0_devel_CONTENTS="usr/include/spice-client-glib-2.0/
 	usr/lib/libspice-client-glib-2.0.* usr/lib/pkgconfig/spice-client-glib-2.0.pc"
-libspice_client_gtk2_0_4_SUMMARY="GTK+2 SPICE widget library (runtime)"
-libspice_client_gtk2_0_4_CONTENTS="usr/bin/cygspice-client-gtk-2.0-4.dll"
-libspice_client_gtk2_0_devel_SUMMARY="GTK+2 SPICE widget library (development)"
-libspice_client_gtk2_0_devel_CONTENTS="usr/include/spice-client-gtk-2.0/
-	usr/lib/libspice-client-gtk-2.0.* usr/lib/pkgconfig/spice-client-gtk-2.0.pc"
-libspice_client_gtk3_0_4_SUMMARY="GTK+3 SPICE widget library (runtime)"
-libspice_client_gtk3_0_4_CONTENTS="usr/bin/cygspice-client-gtk-3.0-4.dll"
+libspice_client_gtk3_0_5_SUMMARY="GTK+3 SPICE widget library (runtime)"
+libspice_client_gtk3_0_5_CONTENTS="usr/bin/cygspice-client-gtk-3.0-5.dll"
 libspice_client_gtk3_0_devel_SUMMARY="GTK+3 SPICE widget library (development)"
 libspice_client_gtk3_0_devel_CONTENTS="usr/include/spice-client-gtk-3.0/
 	usr/lib/libspice-client-gtk-3.0.* usr/lib/pkgconfig/spice-client-gtk-3.0.pc"
@@ -67,12 +57,8 @@ libspice_controller_devel_CONTENTS="usr/include/spice-controller/
 	usr/lib/libspice-controller.* usr/lib/pkgconfig/spice-controller.pc"
 girepository_SpiceClientGLib2_0_SUMMARY="GObject SPICE client library (GObject Introspection)"
 girepository_SpiceClientGLib2_0_CONTENTS="usr/*/gir*/SpiceClientGLib-2.0.*"
-girepository_SpiceClientGtk2_0_SUMMARY="GTK+2 SPICE widget library (GObject Introspection)"
-girepository_SpiceClientGtk2_0_CONTENTS="usr/*/gir*/SpiceClientGtk-2.0.*"
 girepository_SpiceClientGtk3_0_SUMMARY="GTK+3 SPICE widget library (GObject Introspection)"
 girepository_SpiceClientGtk3_0_CONTENTS="usr/*/gir*/SpiceClientGtk-3.0.*"
-python_spiceclientgtk_SUMMARY="GTK+2 SPICE widget library (Python bindings)"
-python_spiceclientgtk_CONTENTS="${PYTHON_SITELIB#/}/SpiceClientGtk.*"
 vala_spice_SUMMARY="GTK+ SPICE client libraries (Vala bindings)"
 vala_spice_CONTENTS="usr/share/vala/vapi/spice-*"
 
@@ -94,11 +80,6 @@ src_compile() {
 	mkdir -p spice-common/spice-protocol/m4
 	gnome2_autoreconf
 
-	mkdir -p ${B}/gtk2
-	cd ${B}/gtk2
-	gnome2_configure --with-gtk=2.0 --with-python
-	cygmake
-
 	mkdir -p ${B}/gtk3
 	cd ${B}/gtk3
 	gnome2_configure --with-gtk=3.0
@@ -106,8 +87,6 @@ src_compile() {
 }
 
 src_install() {
-	cd ${B}/gtk2
-	cyginstall noinst_PROGRAMS=
 	cd ${B}/gtk3
 	cyginstall noinst_PROGRAMS=
 }
