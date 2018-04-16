@@ -1,7 +1,7 @@
 inherit gnome2
 
 NAME="spice-gtk"
-VERSION=0.33
+VERSION=0.34
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="SPICE GTK+ client"
